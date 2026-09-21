@@ -1,0 +1,42 @@
+@charset "UTF-8";
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+#maincontainer {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  background-position: right bottom;
+  padding: 1px;
+}
+#board {
+  width: 80%;
+  aspect-ratio: 1/1;
+  max-width: 450px;
+  border: 1px solid greenyellow;
+  /* background: orange; */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 6%;
+  display: grid;
+  background-color: rgba(255, 255, 255, 0.351);
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+.SnakeCSS {
+  background-image: radial-gradient(at left center, yellow, green);
+}
+.bodyCSS {
+  background-image: radial-gradient(at left center, green, grey);
+}
+.FoodCSS {
+  background: red;
+}
+span {
+  font-size: 20px;
+  margin-left: 5px;
+}
