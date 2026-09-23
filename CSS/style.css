@@ -1,4 +1,7 @@
 @charset "UTF-8";
+@import "https://fonts.googleapis.com/css2?family=Chango&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap";
+
+/* @charset "UTF-8"; */
 * {
   margin: 0px;
   padding: 0px;
@@ -11,6 +14,7 @@
   background-size: cover;
   background-position: right bottom;
   padding: 1px;
+  position: relative;
 }
 #board {
   width: 80%;
@@ -21,7 +25,7 @@
   backdrop-filter: blur(10px);
   border-radius: 10px;
   margin: 0 auto;
-  margin-top: 6%;
+  /* margin-top: 6%; */
   display: grid;
   background-color: rgba(255, 255, 255, 0.351);
   grid-template-columns: repeat(20, 1fr);
@@ -39,4 +43,92 @@
 span {
   font-size: 20px;
   margin-left: 5px;
+}
+.scoreboard {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  position: fixed;
+  right: 10px;
+}
+.highscore {
+  font-family: "Montserrat", sans-serif;
+  position: fixed;
+  font-size: 1.5rem;
+  right: 10px;
+  top: 4rem;
+}
+
+.mutebox {
+  position: fixed;
+  top: 1rem;
+  font-size: 2rem;
+  left: 2rem;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 10px;
+  color: rgb(8, 90, 35);
+}
+.mutebox:hover {
+  background: rgba(255, 255, 255, 0.295);
+}
+
+#controlbox {
+  /* display: none; */
+  margin: 0 auto;
+  margin-top: 4rem;
+  /* position: fixed; */
+  bottom: 1rem;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid green;
+  background-color: rgba(255, 255, 255, 0.351);
+  /* background: orange; */
+  /* padding: 20px; */
+  min-height: 120px;
+  position: relative;
+}
+#controlbox i:active {
+  background-color: rgba(255, 255, 255, 0.356);
+}
+#controlbox i {
+  margin: -30px 0px 0px -30px;
+  /* background-color: red; */
+  border-radius: 10px;
+  /* padding: 10px; */
+  box-sizing: content-box;
+  padding: 10px;
+  font-size: 2rem;
+}
+.fa-up-long {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  /* margin: 5px; */
+  /* color: orange; */
+  /* border: 1px solid red; */
+}
+.fa-down-long {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+}
+.fa-left-long {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+}
+.fa-right-long {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+}
+@media (max-width: 768px) {
+  #board {
+    margin-top: 25%;
+  }
+  #controlbox {
+    display: block;
+    /* padding: 20px; */
+  }
 }

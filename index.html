@@ -4,12 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+      integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="CSS/style.css" />
   </head>
   <body>
     <div id="maincontainer">
-      <p align="center"><span>Score:0</span><span>HighScore:0</span></p>
+      <span class="scoreboard">Score:0</span><br /><span class="highscore"
+        >HighScore:0</span
+      >
+
+      <div class="mutebox">
+        <i class="fa fa-volume-xmark" aria-hidden="true"></i>
+      </div>
       <div id="board"></div>
+      <div id="controlbox">
+        <i class="fa-solid fa-up-long" style="color: rgb(85, 185, 55)"></i>
+        <i class="fa-solid fa-down-long" style="color: rgb(85, 185, 55)"></i>
+        <i class="fa-solid fa-right-long" style="color: rgb(85, 185, 55)"></i>
+        <i class="fa-solid fa-left-long" style="color: rgb(85, 185, 55)"></i>
+      </div>
     </div>
     <script src="JS/index.js"></script>
   </body>

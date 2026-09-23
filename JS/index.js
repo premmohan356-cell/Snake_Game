@@ -1,8 +1,14 @@
 let moveobj = { x: 0, y: 0 };
-let playSound = new Audio("../music/music.mp3");
-let moveSound = new Audio("../music/move.mp3");
-let gameoverSound = new Audio("../music/gameover.mp3");
-let foodSound = new Audio("../music/food.mp3");
+let playSound = new Audio("music/music.mp3");
+playSound.muted = true;
+let moveSound = new Audio("music/move.mp3");
+moveSound.muted = true;
+
+let gameoverSound = new Audio("music/gameover.mp3");
+gameoverSound.muted = true;
+
+let foodSound = new Audio("music/food.mp3");
+foodSound.muted = true;
 let lasttime = 0;
 let speed = 12;
 let score = 0;
@@ -20,7 +26,6 @@ let snake = [
 
 let food = { x: 3, y: 10 };
 let Borad = document.querySelector("#board");
-
 // Main function.........................
 function main(ctime) {
   requestAnimationFrame(main);
@@ -56,7 +61,10 @@ function game() {
   }
   if (isCollide(snake)) {
     moveobj = { x: 0, y: 0 };
+    playSound.pause();
+    gameoverSound.play();
     alert("Game Over");
+    playSound.play();
     snake = [{ x: 12, y: 13 }];
     score = 0;
   }
@@ -67,6 +75,7 @@ function game() {
   ) {
     snake.push({ x: food.x, y: food.y });
     score++;
+    foodSound.play();
     if (score > highscore) {
       highscore++;
     }
@@ -126,27 +135,95 @@ function game() {
 }
 
 //Main Login..............................................
+playSound.play();
 document.onkeydown = function (event) {
   switch (event.code) {
     case "ArrowRight":
       moveobj.x = 1;
       moveobj.y = 0;
+      event.preventDefault();
+      moveSound.play();
+
       break;
     case "ArrowLeft":
       moveobj.x = -1;
       moveobj.y = 0;
+      event.preventDefault();
+      moveSound.play();
+
       break;
     case "ArrowUp":
       moveobj.x = 0;
       moveobj.y = -1;
+      event.preventDefault();
+      moveSound.play();
+
       break;
     case "ArrowDown":
       moveobj.x = 0;
       moveobj.y = 1;
+      event.preventDefault();
+      moveSound.play();
+
     default:
       break;
   }
 };
-
-// game();
 requestAnimationFrame(main);
+// Mute Button Work...................................
+let mutekey = true;
+let muteBtn = document.querySelector(".mutebox i");
+muteBtn.addEventListener("click", function () {
+  if (mutekey) {
+    mutekey = false;
+    playSound.play();
+    this.className = "fa fa-volume-up";
+    playSound.muted = false;
+    gameoverSound.muted = false;
+    foodSound.muted = false;
+    moveSound.muted = false;
+  } else {
+    this.className = "fa fa-volume-xmark";
+    mutekey = true;
+    playSound.muted = true;
+    gameoverSound.muted = true;
+    foodSound.muted = true;
+    moveSound.muted = true;
+  }
+});
+// onscreen controler............................
+let controllers = document.querySelectorAll("#controlbox i");
+controllers.forEach((n, index) => {
+  n.addEventListener("pointerdown", function () {
+    switch (index) {
+      case 0:
+        moveobj.x = 0;
+        moveobj.y = -1;
+        moveSound.play();
+
+        break;
+      case 1:
+        moveobj.x = 0;
+        moveobj.y = 1;
+        // event.preventDefault();
+        moveSound.play();
+
+        break;
+      case 2:
+        moveobj.x = 1;
+        moveobj.y = 0;
+        // event.preventDefault();
+        moveSound.play();
+
+        break;
+      case 3:
+        moveobj.x = -1;
+        moveobj.y = 0;
+        // event.preventDefault();
+        moveSound.play();
+
+      default:
+        break;
+    }
+  });
+});
