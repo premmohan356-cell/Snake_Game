@@ -1,6 +1,7 @@
 let moveobj = { x: 0, y: 0 };
 let playSound = new Audio("music/music.mp3");
 playSound.muted = true;
+playSound.loop = true;
 let moveSound = new Audio("music/move.mp3");
 moveSound.muted = true;
 
@@ -9,8 +10,11 @@ gameoverSound.muted = true;
 
 let foodSound = new Audio("music/food.mp3");
 foodSound.muted = true;
+// let stateGame = true;
+let buttons = document.querySelector(".MenuBtn");
+let Menu_Boxes = document.querySelector("#Menu-modal");
 let lasttime = 0;
-let speed = 12;
+let speed = 3;
 let score = 0;
 let highscore = 0;
 if (localStorage.getItem("highscore")) {
@@ -32,6 +36,7 @@ function main(ctime) {
   if (ctime - lasttime < 1000 / speed) {
     return;
   }
+  if (Menu_Boxes.style.display == "block") return;
   lasttime = ctime;
   game();
 }
@@ -173,23 +178,44 @@ requestAnimationFrame(main);
 // Mute Button Work...................................
 let mutekey = true;
 let muteBtn = document.querySelector(".mutebox i");
+let muteinp = document.querySelector(".mutebox input");
+let SoundArray = [playSound, gameoverSound, foodSound, moveSound];
 muteBtn.addEventListener("click", function () {
   if (mutekey) {
     mutekey = false;
     playSound.play();
     this.className = "fa fa-volume-up";
-    playSound.muted = false;
-    gameoverSound.muted = false;
-    foodSound.muted = false;
-    moveSound.muted = false;
+    SoundArray.forEach((n) => {
+      n.muted = false;
+    });
+    muteinp.style.display = "block";
+
+    // playSound.muted = false;
+    // gameoverSound.muted = false;
+    // foodSound.muted = false;
+    // moveSound.muted = false;
   } else {
     this.className = "fa fa-volume-xmark";
     mutekey = true;
-    playSound.muted = true;
-    gameoverSound.muted = true;
-    foodSound.muted = true;
-    moveSound.muted = true;
+    SoundArray.forEach((n) => {
+      n.muted = true;
+    });
+    muteinp.style.display = "none";
+    // playSound.muted = true;
+    // gameoverSound.muted = true;
+    // foodSound.muted = true;
+    // moveSound.muted = true;
   }
+});
+muteinp.addEventListener("input", function () {
+  SoundArray.forEach((n) => {
+    n.volume = this.value;
+    if (this.value == "0") {
+      muteBtn.className = "fa fa-volume-xmark";
+    } else {
+      muteBtn.className = "fa fa-volume-up";
+    }
+  });
 });
 // onscreen controler............................
 let controllers = document.querySelectorAll("#controlbox i");
@@ -227,3 +253,25 @@ controllers.forEach((n, index) => {
     }
   });
 });
+
+// buttons.click();
+// buttons.click=function(){
+//  if(Menu_Boxes)
+// }
+
+// Speed Work..............................
+let SpeedArray = document.querySelector(".Modal-menu");
+SpeedArray.children[0].addEventListener("click", function () {
+  SpeedArray.children[1].value--;
+  Speedchange();
+});
+SpeedArray.children[2].addEventListener("click", function () {
+  SpeedArray.children[1].value++;
+  // alert("Heelo");
+  Speedchange();
+});
+SpeedArray.children[1].addEventListener("change", Speedchange);
+function Speedchange() {
+  SpeedArray.children[1].value = Math.abs(SpeedArray.children[1].value % 9);
+  speed = Math.abs(3 + Number(SpeedArray.children[1].value));
+}
